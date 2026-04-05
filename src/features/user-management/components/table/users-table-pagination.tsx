@@ -6,7 +6,7 @@ import {
   PaginationPrevious,
   PaginationNext,
   PaginationEllipsis,
-} from "@/components/ui/pagination";
+} from "@/design-systems/shadcn/components/pagination";
 
 interface UsersTablePaginationProps {
   page: number;

@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "@/design-systems/shadcn/components/card";
+import { Badge } from "@/design-systems/shadcn/components/badge";
 
 export function TechStack() {
   const techStack = [

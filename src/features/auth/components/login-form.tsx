@@ -2,14 +2,14 @@
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@/design-systems/shadcn/components/input";
+import { Label } from "@/design-systems/shadcn/components/label";
 import React, { useId, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/design-systems/shadcn/components/button";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "@/features/auth/api/login";
-import { FormSuccess, FormError } from "@/components/ui/form-messages";
+import { FormSuccess, FormError } from "@/design-systems/shadcn/components/form-messages";
 import { loginSchema, type LoginSchema } from "@/features/auth/schemas/login-schema";
 
 interface LoginFormProps {

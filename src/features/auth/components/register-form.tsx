@@ -3,13 +3,13 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/design-systems/shadcn/components/input";
+import { Label } from "@/design-systems/shadcn/components/label";
+import { Button } from "@/design-systems/shadcn/components/button";
 import PasswordInput from "@/features/auth/components/password-input";
 import { registerSchema, type RegisterSchema } from "@/features/auth/schemas/register-schema";
 import { registerUser } from "@/features/auth/api/register";
-import { FormSuccess, FormError } from "@/components/ui/form-messages";
+import { FormSuccess, FormError } from "@/design-systems/shadcn/components/form-messages";
 
 const RegisterForm = () => {
   const [formState, setFormState] = React.useState<{

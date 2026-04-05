@@ -2,17 +2,17 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/design-systems/shadcn/components/label";
 import type { UserWithDetails } from "@/features/user-management/types";
-import { ConfirmationDialog } from "@/components/ui/confirmation-dialog";
-import { Textarea } from "@/components/ui/textarea";
+import { ConfirmationDialog } from "@/design-systems/shadcn/components/confirmation-dialog";
+import { Textarea } from "@/design-systems/shadcn/components/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/design-systems/shadcn/components/select";
 import { adminConfig } from "@/features/user-management/config/admin-config";
 
 interface UserBanDialogProps {

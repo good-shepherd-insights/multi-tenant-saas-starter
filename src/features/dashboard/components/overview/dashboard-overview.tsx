@@ -5,9 +5,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+} from "@/design-systems/shadcn/components/card";
+import { Badge } from "@/design-systems/shadcn/components/badge";
+import { Button } from "@/design-systems/shadcn/components/button";
 import Link from "next/link";
 import { dashboardConfig } from "@/features/dashboard/config/dashboard-config";
 

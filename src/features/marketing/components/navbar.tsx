@@ -1,7 +1,7 @@
 "use client";
 
 import { authClientProvider } from "@/auth/client-provider";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/design-systems/shadcn/components/button";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -10,9 +10,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+} from "@/design-systems/shadcn/components/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/design-systems/shadcn/components/avatar";
+import { Badge } from "@/design-systems/shadcn/components/badge";
 import { LogOut, Shield, User, Menu } from "lucide-react";
 import Image from "next/image";
 

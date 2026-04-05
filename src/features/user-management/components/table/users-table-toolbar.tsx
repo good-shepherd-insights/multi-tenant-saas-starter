@@ -4,7 +4,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@/components/ui/select";
+} from "@/design-systems/shadcn/components/select";
 import { adminConfig } from "@/features/user-management/config/admin-config";
 
 interface UsersTableToolbarProps {

@@ -3,18 +3,18 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { createUser } from "@/features/user-management/api/admin-actions";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { ConfirmationDialog } from "@/components/ui/confirmation-dialog";
+import { Label } from "@/design-systems/shadcn/components/label";
+import { Input } from "@/design-systems/shadcn/components/input";
+import { ConfirmationDialog } from "@/design-systems/shadcn/components/confirmation-dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/design-systems/shadcn/components/select";
 
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@/design-systems/shadcn/components/switch";
 import { adminConfig } from "@/features/user-management/config/admin-config";
 
 interface UserAddDialogProps {

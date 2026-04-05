@@ -2,10 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/design-systems/shadcn/components/button";
 import LoginForm from "@/features/auth/components/login-form";
-import { Card, CardContent } from "@/components/ui/card";
-import { GoogleIcon, GithubIcon } from "@/components/ui/icons";
+import { Card, CardContent } from "@/design-systems/shadcn/components/card";
+import { GoogleIcon, GithubIcon } from "@/design-systems/shadcn/components/icons";
 import { authClientProvider } from "@/auth/client-provider";
 import { GalleryVerticalEnd } from "lucide-react";
 

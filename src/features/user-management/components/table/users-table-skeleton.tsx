@@ -1,5 +1,5 @@
-import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
+import { TableBody, TableCell, TableRow } from "@/design-systems/shadcn/components/table";
+import { Skeleton } from "@/design-systems/shadcn/components/skeleton";
 
 export function UsersTableSkeleton() {
   return (

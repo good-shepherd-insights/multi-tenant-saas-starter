@@ -9,8 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from "@/design-systems/shadcn/components/dropdown-menu";
+import { Button } from "@/design-systems/shadcn/components/button";
 import type { UserWithDetails } from "@/features/user-management/types";
 import { banUser } from "@/features/user-management/api/admin-actions";
 import { UserBanDialog } from "@/features/user-management/components/dialogs/user-ban-dialog";

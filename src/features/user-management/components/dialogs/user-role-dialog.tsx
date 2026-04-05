@@ -3,16 +3,16 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { updateUserRole } from "@/features/user-management/api/admin-actions";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/design-systems/shadcn/components/label";
 import type { UserWithDetails } from "@/features/user-management/types";
-import { ConfirmationDialog } from "@/components/ui/confirmation-dialog";
+import { ConfirmationDialog } from "@/design-systems/shadcn/components/confirmation-dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/design-systems/shadcn/components/select";
 import { adminConfig } from "@/features/user-management/config/admin-config";
 
 interface UserRoleDialogProps {

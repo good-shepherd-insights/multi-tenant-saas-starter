@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { revokeUserSessions } from "@/features/user-management/api/admin-actions";
 import type { UserWithDetails } from "@/features/user-management/types";
-import { ConfirmationDialog } from "@/components/ui/confirmation-dialog";
+import { ConfirmationDialog } from "@/design-systems/shadcn/components/confirmation-dialog";
 import { adminConfig } from "@/features/user-management/config/admin-config";
 
 interface UserRevokeSessionsDialogProps {

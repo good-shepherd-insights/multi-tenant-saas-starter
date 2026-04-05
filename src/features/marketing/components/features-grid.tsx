@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/design-systems/shadcn/components/card";
 
 export function FeaturesGrid() {
   const features = [

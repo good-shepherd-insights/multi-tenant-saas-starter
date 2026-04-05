@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/design-systems/shadcn/components/button";
+import { Card, CardContent } from "@/design-systems/shadcn/components/card";
 import RegisterForm from "@/features/auth/components/register-form";
-import { GoogleIcon, GithubIcon } from "@/components/ui/icons";
+import { GoogleIcon, GithubIcon } from "@/design-systems/shadcn/components/icons";
 import { authClientProvider } from "@/auth/client-provider";
 import { GalleryVerticalEnd } from "lucide-react";
 

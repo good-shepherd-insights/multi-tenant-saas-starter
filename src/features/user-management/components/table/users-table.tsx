@@ -11,17 +11,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/design-systems/shadcn/components/table";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/design-systems/shadcn/components/tooltip";
 
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/design-systems/shadcn/components/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/design-systems/shadcn/components/avatar";
 import type { UserWithDetails } from "@/features/user-management/types";
-import { GithubIcon, GoogleIcon } from "@/components/ui/icons";
+import { GithubIcon, GoogleIcon } from "@/design-systems/shadcn/components/icons";
 import { UserActions } from "@/features/user-management/components/table/user-actions";
 import { UserAddDialog } from "@/features/user-management/components/dialogs/user-add-dialog";
 

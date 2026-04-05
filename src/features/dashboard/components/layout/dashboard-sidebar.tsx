@@ -14,7 +14,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/design-systems/shadcn/components/sidebar";
 
 interface DashboardSidebarProps {
   pathname: string;

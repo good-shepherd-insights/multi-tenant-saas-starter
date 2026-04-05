@@ -4,7 +4,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "@/design-systems/shadcn/components/sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,11 +12,11 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/design-systems/shadcn/components/breadcrumb";
 
 import React from "react";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/design-systems/shadcn/components/separator";
 import { DashboardSidebar } from "@/features/dashboard/components/layout/dashboard-sidebar";
 import type { NavItemList } from "@/config/types";
 
