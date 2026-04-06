@@ -1,4 +1,5 @@
 import "./globals.css";
+import "@/config/features-index";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";

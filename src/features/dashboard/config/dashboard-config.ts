@@ -15,10 +15,7 @@ export const dashboardConfig = {
   defaultRoute: "/dashboard",
   rootLabel: "Dashboard",
   rootHref: "/dashboard",
-  nav: [
-    { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-  ] satisfies NavItem[],
-  // Deferred: /dashboard/settings does not exist yet
+  nav: [] satisfies NavItem[],
   footerNav: [] satisfies NavItem[],
   pages: {
     overview: {

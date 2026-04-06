@@ -9,10 +9,7 @@ export const adminConfig = {
   defaultRoute: "/admin/users",
   rootLabel: "Admin",
   rootHref: "/admin",
-  nav: [
-    { href: "/admin/users", label: "Users", icon: Users },
-  ] satisfies NavItem[],
-  // Deferred: /admin/settings does not exist yet
+  nav: [] satisfies NavItem[],
   footerNav: [] satisfies NavItem[],
   pages: {
     users: {

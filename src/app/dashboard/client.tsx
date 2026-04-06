@@ -4,12 +4,14 @@ import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import LayoutComponent from "@/features/dashboard/components/layout/dashboard-layout";
 import { authClientProvider } from "@/auth/client-provider";
-import { dashboardConfig } from "@/features/dashboard/config/dashboard-config";
+import { featureRegistry } from "@/lib/registry";
 
 export function DashboardLayoutClient({
   children,
+  role,
 }: {
   children: React.ReactNode;
+  role: "admin" | "user";
 }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -23,14 +25,17 @@ export function DashboardLayoutClient({
     }
   };
 
+  const navItems = featureRegistry.getNavigation(role, "sidebar");
+  const footerItems = featureRegistry.getNavigation(role, "footer");
+
   return (
     <LayoutComponent
       pathname={pathname}
       onLogout={handleLogout}
-      navItems={dashboardConfig.nav}
-      footerItems={dashboardConfig.footerNav}
-      title={dashboardConfig.title}
-      version={dashboardConfig.version}
+      navItems={navItems}
+      footerItems={footerItems}
+      title="SaaS Starter"
+      version="v1.0.0"
       rootLabel="Dashboard"
       rootHref="/dashboard"
     >

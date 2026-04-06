@@ -16,5 +16,5 @@ export default async function DashboardLayout({
     redirect("/auth/login");
   }
 
-  return <DashboardLayoutClient>{children}</DashboardLayoutClient>;
+  return <DashboardLayoutClient role={session.user.role as "admin" | "user"}>{children}</DashboardLayoutClient>;
 }
