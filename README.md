@@ -1,188 +1,203 @@
-# 🚀 Multi-Tenant SaaS Starter
+# Multi-Tenant SaaS Starter
 
-A modern, production-ready Next.js boilerplate with comprehensive authentication, domain-bound feature slicing, admin dashboard capabilities, and scalable user management. Redesigned by **Good Shepherd Insights, LLC.** for rapid application development.
+A modern, production-ready Next.js boilerplate designed for high-fidelity SaaS applications. This starter implements a modular feature-slice architecture, a hexagonal authentication layer, and a configuration-driven UI system. Maintained and specialized by [Good Shepherd Insights, LLC.](https://goodshepherdinsights.com) for rapid application development.
 
 ---
 
-## 🏗️ System Architecture & Data Flow
+## Architecture and Developer Guide
 
-This application is built on a highly strict **Feature-Sliced Design (FSD)** architecture. Using Next.js App Router alongside Server Components and isolated Server Actions, the application completely decouples business logic from UI components.
+This application follows a configuration-driven, modular architecture. For a deep-dive into the technical specifications, class relationships, and database ER diagrams, refer to the [Full Architectural Specification](file:///Users/dev/Projects/multi-tenant-saas-starter/ARCHITECTURE.md).
 
-### 1. The Request Lifecycle
+### Modular Registry System
+
+The UI and business logic are decoupled via a central discovery registry. This allows features to be toggled or swapped without modifying the root layout or navigation components.
+
 ```mermaid
 graph TD
-    Client[Client Browser]
+    subgraph "Core Registry"
+        Registry["FeatureRegistry (Singleton)"]
+        Activator["src/config/features-index.ts"]
+    end
+
+    subgraph "Feature Slices"
+        F_Dash["Dashboard Feature"]
+        F_Auth["Auth Feature"]
+        F_Custom["New Feature"]
+    end
+
+    F_Dash -- "Metadata" --> Activator
+    F_Auth -- "Metadata" --> Activator
+    F_Custom -- "Metadata" --> Activator
     
-    subgraph Next.js App Router
-        Client -- HTTP / RSC --> Router[Routing & Middleware]
-        Router -- Allowed Request --> Page[Server Components / Pages]
-        Router -- Blocked Request --> Login[Login Page]
-        
-        Page -- Interacts --> ServerActions[Server Actions]
-        Page -- API calls --> APIAuth[Auth Catch-all API]
-    end
-
-    subgraph Authentication & Access Control
-        BetterAuth[Better Auth Client & Server]
-        
-        APIAuth -- Uses --> BetterAuth
-        ServerActions -- Validates Session via --> BetterAuth
-    end
-
-    subgraph Data & Persistence Layer
-        Drizzle[Drizzle ORM]
-        DB[(PostgreSQL)]
-        
-        Page -- Queries Data --> Drizzle
-        ServerActions -- Mutates Data --> Drizzle
-        BetterAuth -- Manages Sessions/Users --> Drizzle
-        Drizzle --- DB
-    end
+    Activator -- "register()" --> Registry
+    
+    Layout["app/layout.tsx"] -- "Discovery" --> Registry
+    Nav["Sidebar/Navbar"] -- "Query" --> Registry
 ```
 
-### 2. Feature-Sliced Design (FSD) Directory Structure
+### Extending the Platform
 
-The UI strictly segregates public landing spaces, user-level dashboards, and privileged administrative panels through nested directory layouts and distinct domain boundaries.
+To add a new feature to the system, follow the standardized "Plug-and-Play" workflow:
+
+1. **Create Slice**: Build your domain logic in `src/features/[feature-name]/`.
+2. **Define Metadata**: Create a `registry.ts` in your slice that implements the `FeatureMetadata` interface.
+3. **Activate**: Import and add your feature to the list in `src/config/features-index.ts`.
+
+Detailed implementation rules are covered in [ARCHITECTURE.md Section 4: Feature Plugin System](file:///Users/dev/Projects/multi-tenant-saas-starter/ARCHITECTURE.md#4-feature-plugin-system).
+
+### Hexagonal Authentication Layer
+
+Identity management is isolated behind a Port/Adapter boundary (`src/auth/`). This prevents the application core from being "locked in" to the Better Auth implementation.
+
+- **Port**: `src/auth/types.ts` defines the interface.
+- **Adapter**: `src/auth/adapters/better-auth/` handles the implementation.
+- **Injection**: `src/auth/server-provider.ts` and `client-provider.ts` expose the session logic to the app.
+
+For visual mapping of these boundaries, see [ARCHITECTURE.md Section 3: Authentication Layer](file:///Users/dev/Projects/multi-tenant-saas-starter/ARCHITECTURE.md#3-authentication-layer-hexagonal).
+
+## Project Structure
+
+The codebase is organized to ensure features are self-contained and easily pluggable.
 
 ```text
 src/
-├── app/                    # Next.js App Router (Pages & Layouts)
-├── components/             # Reusable UI components
-│   └── ui/                 # Radix UI + Tailwind generic primitives
-├── db/                     # PostgreSQL / Drizzle ORM config
-├── features/               # Feature-Sliced Design domains
-│   ├── auth/               # Identity, login forms, & auth schemas
-│   ├── dashboard/          # Authenticated user dashboard views
-│   ├── marketing/          # Public-facing presentation components
-│   └── user-management/    # Admin views, tables, and server actions
+├── app/                    # Next.js App Router (Routing Shell)
+├── auth/                   # Hexagonal Auth Layer (Ports/Adapters/DI)
+├── config/                 # Platform-level feature activation index
+├── db/                     # Data persistence (Schema & Drizzle config)
+├── design-systems/         # Unified UI primitives (shadcn, Radix, Tailwind v4)
+├── features/               # Modular domain slices
+│   ├── auth/               # Identity and Credential management
+│   ├── dashboard/          # Performance overview and layout logic
+│   ├── marketing/          # Public-facing landing and presentation
+│   ├── new-dashboard/      # Analytical dashboard implementation
+│   └── user-management/    # Administrative controls and RBAC actions
 ├── hooks/                  # Global React hooks
-└── lib/                    # Shared configuration and utilities
-```
-
-### 3. Component Rendering & Server Action Boundaries
-```mermaid
-graph TD
-    %% User Routing Context
-    subgraph Frontend User Boundary
-        Landing(app/page.tsx) --> |Login| Dashboard(app/dashboard/page.tsx)
-        Dashboard -.-> |Reads User State| State[Local Session State]
-        Dashboard --- Navbar(features/marketing/components/navbar)
-        Landing --- Hero(features/marketing/components/animated-hero)
-        Landing --- Features(features/marketing/components/features-grid)
-        Landing --- Footer(features/marketing/components/footer)
-    end
-
-    %% Admin Routing Context
-    subgraph Frontend Admin Boundary
-        AdminSub(app/admin/*) --> AdminLayout(app/admin/layout.tsx)
-        AdminLayout --> |Enforces Session.role === 'admin'| DashLayout(features/dashboard/components/layout/dashboard-layout)
-        DashLayout --> AdminPage(app/admin/page.tsx)
-        DashLayout --> UsersPage(app/admin/users/page.tsx)
-        
-        UsersPage --> UserTable(features/user-management/components/table/users-table.tsx)
-        UserTable --> Dialogs(features/user-management/components/dialogs/user-*-dialog.tsx)
-    end
-
-    %% Access Constraint
-    Dashboard --> |Attempt Access| AdminSub
-    AdminLayout -.-> |Blocks if Unauthorized| Dashboard
+├── lib/                    # Core Registry and shared utility logic
+└── proxy.ts                # Middleware authentication shim
 ```
 
 ---
 
-## ✨ Core Application Features
+## Core Features
 
-### 🔐 Domain-Isolated Authentication
-- **Better Auth Integration:** Provides core session tracking, JWT parsing, and OAuth handshakes strictly validated in `.eslintrc` and middleware.
-- **Role-Based Access Control (RBAC):** Admin privilege is governed natively. Users are scoped to `admin` or `user` roles which map strictly to PostgreSQL.
-- **Resource Protection:** Routing logic natively intercepts incoming requests using whitelist configurations (`public-paths.ts`).
+The starter provides a comprehensive feature set for building multi-tenant SaaS applications with strict domain separation.
 
-### 👥 Strict User Management Domain
-- **Server Actions Over REST:** Administrative functions (e.g., banning users or revoking sessions) route specifically through isolated Server Actions directly interacting with Drizzle ORM to avoid generic API exposure.
-- **End-to-End Type Safety:** Deep schema validation utilizing `zod` directly bounding UI client forms to PostgreSQL tables.
+### Identity and Access
+- **Multi-Provider Auth**: Native support for Email/Password, GitHub, and Google OAuth.
+- **Account Linking**: Automatic linking of multiple social identities to a single user profile.
+- **Email Verification**: Mandatory verification flow via Resend integration.
+- **Role-Based Access Control**: Domain-level RBAC (admin/user) with session-guarded layouts.
+- **Security Headers**: Production-ready CSRF and Trusted Origin protection.
 
-### 🎨 Next-Generation UI/UX Pipeline
-- **Tailwind v4 OKLCH:** Global styling completely skips standard RGB variables and relies heavily on the `OKLCH` framework for mathematically guaranteed contrast ratios natively inside CSS variables.
-- **Component Polymorphism:** Elements use pure Radix UI primitives augmented heavily with Class Variance Authority (`cva`) logic ensuring immutable CSS component rules.
-- **Dry Styling:** Advanced `tailwind-merge` natively intercepts dynamic design property injections preventing CSS cascading crashes.
+### Management and Dashboards
+- **Modular Dashboard**: Configurable widget-based dashboard overview.
+- **User Management**: Administrative interface for viewing, banning, and managing user roles.
+- **Registry System**: Plugin-driven architecture for enabling/disabling feature slices.
 
----
-
-## 🛠️ Stack Deep Dive
-
-- **Framework:** Next.js 16 with App Router
-- **Authentication:** Better Auth
-- **Database:** PostgreSQL with Drizzle ORM
-- **Styling:** Tailwind CSS v4 (Pure CSS Engine)
-- **UI Components:** Radix UI (`components.json` controlled)
-- **Validation:** Zod schemas
-- **Email Pipeline:** Resend
-- **TypeScript:** Strict full type safety rules enforced
+### Design and UX
+- **Theme System**: OKLCH-based design tokens for perfectly consistent color scaling.
+- **Typography**: Optimized Geist-compliant font stack (Zinc/Stone palette).
+- **Responsive Primitives**: Pure Radix UI components with CVA variant logic.
 
 ---
 
-## 🚀 Quick Start & Deployment Infrastructure
+## Configuration
+
+### Environment Variables
+
+Required secrets and configuration keys defined in `.env.local`.
+
+| Variable | Required | Description |
+|---|---|---|
+| BETTER_AUTH_SECRET | Yes | High-entropy 32-character string used for cryptographic signing and encryption of session cookies. Generate via `openssl rand -hex 32`. Rotating this key will immediately invalidate all active user sessions. |
+| BETTER_AUTH_URL | Yes | The canonical base URL of the application. In production, this must explicitly include the `https://` protocol and match the public domain. Do not include a trailing slash. |
+| DATABASE_URL | Yes | Full PostgreSQL connection URI. Format: `postgresql://user:password@host:port/dbname?sslmode=require`. Use `sslmode=require` to ensure encrypted transport for remote/managed production databases. |
+| GITHUB_CLIENT_ID | No | The Client ID for the GitHub OAuth application. Registered under Developer Settings > OAuth Apps. |
+| GITHUB_CLIENT_SECRET | No | The Client Secret for the GitHub OAuth application. Required for the `access_token` exchange flow. |
+| GOOGLE_CLIENT_ID | No | The Client ID for the Google OAuth 2.0 application. Managed via the Google Cloud Console (APIs & Services). |
+| GOOGLE_CLIENT_SECRET | No | The Client Secret for the Google OAuth application. The redirect URI must be authorized as `${BETTER_AUTH_URL}/api/auth/callback/google`. |
+| RESEND_API_KEY | No | API Key for transactional email delivery via Resend. Mandatory if `requireEmailVerification` is enabled in the auth configuration. |
+
+---
+
+## Operational Guide
+
+### Database Management (Drizzle Kit)
+
+The project uses Drizzle ORM for type-safe schema management and migrations.
+
+- **Generate Migrations**: `pnpm db:generate` to introspect `src/db/schema.ts` and create SQL files.
+- **Apply Migrations**: `pnpm db:migrate` to push changes to the PostgreSQL instance.
+- **Data Viewer**: `pnpm db:studio` to launch the local Drizzle Studio GUI.
+
+### Administrative Setup
+
+To grant administrative access to a user account, use the Drizzle Studio interface or a SQL update:
+
+```sql
+UPDATE "user" SET role = 'admin' WHERE email = 'your-email@example.com';
+```
+
+Once updated, the user will be granted access to the `/admin` workspace and management tools.
+
+---
+
+## Core Technologies
+
+The stack is curated for maximum type safety, performance, and developer ergonomics.
+
+- **Framework**: Next.js 16 (App Router)
+- **Authentication**: Better Auth (Hexagonal Implementation)
+- **Database**: PostgreSQL with Drizzle ORM
+- **Styling**: Tailwind CSS v4 (Pure CSS Engine with OKLCH tokens)
+- **UI Components**: Radix UI with shadcn/ui primitives
+- **Registry**: Custom FeatureRegistry for dynamic discoverability
+- **Validation**: Zod (End-to-end schema integrity)
+- **Deployment**: Vercel ready
+
+---
+
+## Key Architectural Patterns
+
+### 1. Hexagonal Identity Architecture (DIP)
+The identity management layer implements a strict **Dependency Inversion Principle**. By isolating the authentication SDK behind the `IAuthServerAdapter` and `IAuthClientAdapter` port interfaces (`src/auth/`), the application core remains decoupled from the specific implementation details of the underlying identity provider. This architecture allows for seamless provider swaps, sophisticated unit testing via mock adapters, and multi-environment flexibility—ensuring that the business logic never leaks into the authentication implementation.
+
+### 2. Configuration-Driven Registry Discovery
+The platform utilizes a **Singleton-based Feature Registry** model. Feature slices (`src/features/`) are self-describing modules that register their metadata—including navigation, widgets, and RBAC rules—with a central discovery engine at boot time. This facilitates **Plug-and-Play modularity**, where features can be enabled, disabled, or strictly gated by the multi-tenant engine simply by modifying the `src/config/features-index.ts` activator, requiring zero manual updates to the shared layout or navigation primitives.
+
+### 3. Feature-Sliced Design (FSD)
+The codebase follows a modular slicing strategy where domain-specific logic, components, and state are colocated within their respective feature directories. This prevents the emergence of "God Components" and ensures that the system scales linearly. Cross-feature dependencies are strictly managed via the public `registry.ts` interface, maintaining a clean directed acyclic graph (DAG) across the application architecture.
+
+---
+
+## Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ 
-- PostgreSQL database (Local or Hosted)
-- Resend account (for email functionality)
+- Node.js 18 or higher
+- PostgreSQL instance (Local or Supabase)
+- Resend API key (for email verification)
 
 ### Installation
 
-1. **Clone the repository**
-    ```bash
-    git clone <repository-url>
-    cd multi-tenant-saas-starter
-    ```
+1. Clone the repository: `git clone https://github.com/good-shepherd-insights/multi-tenant-saas-starter`
+2. Install dependencies: `pnpm install`
+3. Configure environment: `cp .env.example .env.local`
+4. Populate database: `pnpm db:generate` then `pnpm db:migrate`
+5. Launch: `pnpm dev`
 
-2. **Install dependencies**
-    ```bash
-    pnpm install
-    ```
+### Available Commands
 
-3. **Environment Setup**
-   Copy the `.env.example` file to `.env.local` and apply your database connection strings.
-   ```bash
-   cp .env.example .env.local
-   ```
-
-4. **Database Database Synchronization**
-   Execute the Drizzle ORM migrations connecting your UI to the Postgres instance.
-    ```bash
-    pnpm db:generate
-    pnpm db:migrate
-    ```
-
-5. **Start Development**
-    ```bash
-    pnpm dev
-    ```
-Visit `http://localhost:3000` to preview the architecture natively mapping user state.
-
-## 🔧 Available CLI Scripts
-
-- `pnpm dev` - Start development server with Turbopack (Rapid compilation)
-- `pnpm build` - Compile components into static/Edge ready outputs
-- `pnpm start` - Spin up production server
-- `pnpm db:generate` - Introspect Schema and generate `.sql` migrations
-- `pnpm db:migrate` - Execute migration pushes to the live database
-- `pnpm db:push` - Push database migrations to the database directly
-- `pnpm db:studio` - Open the Native Drizzle local data viewer
+- `pnpm dev`: Start development server with Turbopack (Rapid compilation)
+- `pnpm build`: Compile for production
+- `pnpm start`: Launch production server
+- `pnpm db:studio`: Open Drizzle local data viewer
+- `pnpm lint`: Run ESLint checks
 
 ---
 
-## 🙋 Support & Licensing
-
-For support and questions:
-- Create an issue in this repository
-- Contact the **Good Shepherd Insights** engineering team.
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ---
 
-**Modified & Maintained by Good Shepherd Insights, LLC.**
-
-**Originally created by [Zexa](https://github.com/zexahq) - [better-auth-starter](https://github.com/zexahq/better-auth-starter)**
+Maintained by [Good Shepherd Insights](https://goodshepherdinsights.com).
+Originally created by [Zexa](https://github.com/zexahq) - [better-auth-starter](https://github.com/zexahq/better-auth-starter)
