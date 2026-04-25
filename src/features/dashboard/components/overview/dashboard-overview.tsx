@@ -76,35 +76,6 @@ export default function DashboardOverview() {
         })}
       </div>
 
-      {/* Tech Stack (Static for now, could be its own feature) */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Tech Stack</CardTitle>
-          <CardDescription>
-            Built with modern technologies for performance, security, and
-            developer experience
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "Next.js 15",
-              "Better Auth",
-              "PostgreSQL",
-              "Drizzle ORM",
-              "Tailwind CSS",
-              "Radix UI",
-              "TypeScript",
-              "React Hook Form",
-              "Zod",
-            ].map((tech) => (
-              <Badge key={tech} variant="outline" className="px-3 py-1">
-                {tech}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }

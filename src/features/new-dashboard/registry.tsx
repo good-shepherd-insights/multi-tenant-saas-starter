@@ -43,27 +43,5 @@ export const newDashboardMetadata: FeatureMetadata = {
       </div>
     </div>
   ),
-  widgets: [
-    {
-      id: "global-users-map",
-      title: "Global Distribution",
-      description: "Real-time user density across all regions",
-      component: <GlobalUsersPlaceholder />,
-      size: "lg",
-    },
-    {
-      id: "platform-insights",
-      title: "Platform Insights",
-      description: "Key performance indicators and suggestions",
-      component: <InsightsPlaceholder />,
-      size: "md",
-    },
-  ],
-  quickActions: [
-    {
-      href: "/dashboard/analytics",
-      label: "View Report",
-      icon: Lightbulb,
-    },
-  ],
+  widgets: [],
 };

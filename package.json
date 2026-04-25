@@ -1,14 +1,14 @@
 {
-  "name": "next-better-auth-starter",
+  "name": "fixpro-app-dashboard",
   "version": "2.0.0",
-  "description": "A modern Next.js boilerplate with authentication, admin dashboard, and user management built with Better Auth, Drizzle ORM, and PostgreSQL",
+  "description": "Fix Pro AI — Upload home inspection reports and get free repair quotes from vetted local contractors in under 5 minutes.",
   "private": true,
-  "author": "Good Shepherd Insights",
+  "author": "Fix Pro AI",
   "license": "MIT",
-  "homepage": "https://goodshepherdinsights.com",
+  "homepage": "https://fixpro.ai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/good-shepherd-insights/multi-tenant-saas-starter"
+    "url": "https://fixpro.ai"
   },
   "scripts": {
     "dev": "next dev --turbopack",
@@ -24,7 +24,6 @@
     "@better-auth/infra": "0.1.13",
     "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-alert-dialog": "^1.1.14",
-    "@radix-ui/themes": "^3.2.1",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-dropdown-menu": "^2.1.15",
@@ -34,7 +33,9 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-switch": "^1.2.5",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@radix-ui/themes": "^3.2.1",
     "@tailwindcss/postcss": "^4.1.7",
+    "@vercel/blob": "^2.3.3",
     "better-auth": "^1.5.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

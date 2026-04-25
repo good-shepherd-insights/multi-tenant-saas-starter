@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Multi-Tenant SaaS Starter",
-  description: "A Next.js boilerplate for building web applications",
+  title: "Fix Pro AI | Free Home Repair Quotes in 5 Minutes",
+  description: "Upload your home inspection report and get a detailed, free repair quote from vetted local contractors in under 5 minutes. No more closing delays.",
 };
 
 export default function RootLayout({

@@ -9,7 +9,7 @@ import Image from "next/image";
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
-    () => ["secure", "modern", "production-ready", "scalable", "powerful"],
+    () => ["fast", "free", "accurate", "reliable", "effortless"],
     [],
   );
 
@@ -31,25 +31,25 @@ function Hero() {
           <div>
             <Button variant="secondary" size="sm" className="gap-4" asChild>
               <a
-                href="https://goodshepherdinsights.com"
+                href="https://fixpro.ai"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image
                   src="/logo.png"
-                  alt="Good Shepherd Insights"
+                  alt="Fix Pro AI"
                   width={16}
                   height={16}
                   className="w-4 h-4"
                 />
-                Built by Good Shepherd Insights <MoveRight className="w-4 h-4" />
+                Powered by Fix Pro AI <MoveRight className="w-4 h-4" />
               </a>
             </Button>
           </div>
           <div className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-primary font-medium">
-                Authentication made
+                Repair quotes made
               </span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                 &nbsp;
@@ -78,23 +78,18 @@ function Hero() {
             </h1>
 
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
-              Skip months of authentication setup. Get a complete Next.js
-              boilerplate with Better Auth, admin dashboard, user management,
-              and everything you need to launch your application with
-              enterprise-grade security.
+              Upload your home inspection report for a fast and completely free
+              repair quote returned in 5 minutes or less, 7 days a week. No
+              more closing delays.
             </p>
           </div>
           <div className="flex flex-row gap-3">
             <Button size="lg" className="gap-4" variant="outline" asChild>
-              <a href="/dashboard">View Demo</a>
+              <a href="/dashboard">Get a Free Quote</a>
             </Button>
             <Button size="lg" className="gap-4" asChild>
-              <a
-                href="https://github.com/good-shepherd-insights/multi-tenant-saas-starter"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Check GitHub Repo <MoveRight className="w-4 h-4" />
+              <a href="/dashboard">
+                View Licensed Contractors <MoveRight className="w-4 h-4" />
               </a>
             </Button>
           </div>

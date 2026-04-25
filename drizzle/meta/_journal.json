@@ -15,6 +15,13 @@
       "when": 1748003205524,
       "tag": "0001_superb_kid_colt",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1777079676052,
+      "tag": "0002_normal_invisible_woman",
+      "breakpoints": true
     }
   ]
 }

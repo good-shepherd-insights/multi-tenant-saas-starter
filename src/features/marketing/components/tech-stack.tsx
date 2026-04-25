@@ -8,32 +8,32 @@ import {
 import { Badge } from "@/design-systems/shadcn/components/badge";
 
 export function TechStack() {
-  const techStack = [
-    "Next.js 15",
-    "Better Auth",
-    "PostgreSQL",
-    "Drizzle ORM",
-    "Tailwind CSS",
-    "shadcn ui",
-    "TypeScript",
-    "React Hook Form",
-    "Zod",
+  const capabilities = [
+    "5-Minute Quotes",
+    "Licensed Contractors",
+    "Escrow Billing",
+    "Automated Pricing",
+    "Inspection Reports",
+    "Free Estimates",
+    "Cost Breakdowns",
+    "7-Day Availability",
+    "Vetted Network",
   ];
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Tech Stack</CardTitle>
+        <CardTitle>Platform Capabilities</CardTitle>
         <CardDescription>
-          Built with modern technologies for performance, security, and developer
-          experience
+          Everything you need to turn inspection reports into actionable repair
+          quotes without the operational friction
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex flex-wrap gap-2">
-          {techStack.map((tech, index) => (
+          {capabilities.map((item, index) => (
             <Badge key={index} variant="outline" className="px-3 py-1">
-              {tech}
+              {item}
             </Badge>
           ))}
         </div>

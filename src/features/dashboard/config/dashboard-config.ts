@@ -19,8 +19,8 @@ export const dashboardConfig = {
   footerNav: [] satisfies NavItem[],
   pages: {
     overview: {
-      title: "Dashboard | SaaS Starter",
-      description: "Your personal dashboard overview.",
+      title: "Dashboard | Fix Pro AI",
+      description: "Your repair quote dashboard overview.",
     },
   },
   quickActions: {
@@ -30,8 +30,8 @@ export const dashboardConfig = {
       { href: "/auth/register", label: "Create Account", icon: Users },
       { href: "/admin", label: "Admin Panel", icon: Shield },
       {
-        href: "https://github.com/good-shepherd-insights/multi-tenant-saas-starter",
-        label: "Documentation",
+        href: "https://fixpro.ai",
+        label: "Help Center",
         icon: Mail,
         external: true,
       },

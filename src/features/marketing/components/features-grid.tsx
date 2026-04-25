@@ -1,4 +1,4 @@
-import { Shield, Users, Database, Palette } from "lucide-react";
+import { Zap, ShieldCheck, CreditCard, Search } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -10,47 +10,52 @@ import {
 export function FeaturesGrid() {
   const features = [
     {
-      icon: <Shield className="h-5 w-5" />,
-      title: "Authentication & Authorization",
+      icon: <Zap className="h-5 w-5" />,
+      title: "Quotes in 5 Minutes",
       description:
-        "Complete auth system with email verification, password reset, and role-based access control.",
+        "Upload your inspection report and receive a detailed, free repair quote before you even finish your coffee.",
       items: [
-        "Email & Password Auth",
-        "Session Management",
-        "Role-based Access",
-        "Account Linking",
+        "Instant Processing",
+        "7 Days a Week",
+        "No Contractor Calls",
+        "Zero Closing Delays",
       ],
     },
     {
-      icon: <Users className="h-5 w-5" />,
-      title: "User Management",
+      icon: <ShieldCheck className="h-5 w-5" />,
+      title: "Licensed Contractor Team",
       description:
-        "Comprehensive user administration with advanced controls and audit capabilities.",
+        "Every contractor in our network is vetted, licensed, and insured for every skill and trade pattern.",
       items: [
-        "User Registration",
-        "Profile Management",
-        "Ban/Unban Users",
-        "Session Revocation",
+        "Fully Licensed",
+        "Insured & Bonded",
+        "Trade-Pattern Verified",
+        "Background Checked",
       ],
     },
     {
-      icon: <Database className="h-5 w-5" />,
-      title: "Database & ORM",
+      icon: <CreditCard className="h-5 w-5" />,
+      title: "Flexible Billing Options",
       description:
-        "Modern database setup with type-safe queries and automated migrations.",
+        "Pay by credit card, check, or even out of escrow. Flexibility isn't a bug — it's a feature.",
       items: [
-        "PostgreSQL",
-        "Drizzle ORM",
-        "Type Safety",
-        "Automated Migrations",
+        "Credit Card",
+        "Check Payment",
+        "Escrow Billing",
+        "Deferred Payment",
       ],
     },
     {
-      icon: <Palette className="h-5 w-5" />,
-      title: "Modern UI/UX",
+      icon: <Search className="h-5 w-5" />,
+      title: "Automated Cost Shopping",
       description:
-        "Beautiful, responsive design system with accessibility built-in.",
-      items: ["Tailwind CSS", "shadcn ui", "Dark Mode", "Mobile Responsive"],
+        "Our platform sources competitive repair quotes from multiple contractors automatically.",
+      items: [
+        "Multi-Contractor Bids",
+        "Best-Price Matching",
+        "Material Cost Breakdown",
+        "Labor Estimates",
+      ],
     },
   ];
 

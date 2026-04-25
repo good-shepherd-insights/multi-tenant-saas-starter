@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Shield, Mail } from "lucide-react";
+import { LayoutDashboard, Upload } from "lucide-react";
 import type { FeatureMetadata } from "@/lib/registry";
 
 export const dashboardMetadata: FeatureMetadata = {
@@ -13,13 +13,6 @@ export const dashboardMetadata: FeatureMetadata = {
     },
   ],
   quickActions: [
-    { href: "/auth/register", label: "Create Account", icon: Users },
-    { href: "/admin", label: "Admin Panel", icon: Shield },
-    {
-      href: "https://github.com/good-shepherd-insights/multi-tenant-saas-starter",
-      label: "Documentation",
-      icon: Mail,
-      external: true,
-    },
+    { href: "/dashboard/estimate", label: "Get Repair Estimate", icon: Upload },
   ],
 };

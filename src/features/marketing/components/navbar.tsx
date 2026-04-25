@@ -33,12 +33,12 @@ const Navbar = () => {
             <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/logo.png"
-                alt="Good Shepherd Insights Logo"
+                alt="Fix Pro AI Logo"
                 width={24}
                 height={24}
                 className="w-8 h-8 rounded-md"
               />
-              <span className="font-bold text-xl">Multi-Tenant SaaS Starter</span>
+              <span className="font-bold text-xl">Fix Pro AI</span>
             </Link>
 
           {/* Navigation Links */}

@@ -34,7 +34,7 @@ export function DashboardLayoutClient({
       onLogout={handleLogout}
       navItems={navItems}
       footerItems={footerItems}
-      title="SaaS Starter"
+      title="Fix Pro AI"
       version="v1.0.0"
       rootLabel="Dashboard"
       rootHref="/dashboard"
